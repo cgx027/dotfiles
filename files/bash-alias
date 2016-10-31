@@ -1,10 +1,25 @@
-# STARTFGCOLOR="\[\e[0;36m\]";
-# STARTBGCOLOR=""  #"\e[47m"
-# ENDCOLOR="\[\e[0m\]"
-# export PS1="$STARTFGCOLOR$STARTBGCOLOR\u@\w>$ENDCOLOR "
+#export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/dist
+# source ~/.nvm/nvm.sh
 
-export PATH=$PATH:~/src/npm/bin
-export TERM="screen-256color"
+
+# npm path
+export PATH=/home/onrack/npm/bin:/home/onrack/bin:/home/onrack/src/on-tools/node_modules/.bin:$PATH
+
+# xterm setting
+export TERM=xterm
+
+# ted misc
+export sk="192.168.128"
+export nd="172.31.128"
+export bmc="192.168.188"
+export lab="10.62.59"
+alias ic=ifconfig
+alias ge="env | grep"
+
+#file by Felix & Ben
+
+# grep alias
+alias ga="alias | grep"
 
 # git alias
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit -n10"
@@ -12,23 +27,30 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 alias gs="git status"
 alias gm="git commit -m "
 alias gd="git diff --color"
-alias gdc="git diff --cached"
-alias gb="git branch"
-alias glog="git log"
-alias ga="git add"
-alias gr="git rm"
-alias gpo="git push origin"
-alias gfu="git fetch upstream"
-alias gc="git checkout"
+alias gr="git remote -v"
 
 #onrack alias
-alias ni="sudo node index.js --color"
-alias nid="sudo node --debug index.js --color"
+alias ni="sudo node index.js"
+alias nid="sudo node --debug index.js"
 alias mt="mocha \$(find spec -name '*-spec.js') -R spec --require spec/helper.js"
 alias jc="jshint -c .jshintrc lib index.js"
-alias mst="sudo /opt/onrack/bin/monorail status"
-alias ms="sudo /opt/onrack/bin/monorail restart"
-alias mp="sudo /opt/onrack/bin/monorail stop && sudo service isc-dhcp-server start"
+alias ms="sudo /opt/onrack/bin/monorail status"
+alias mrs="sudo /opt/onrack/bin/monorail restart"
+alias mp="sudo /opt/onrack/bin/monorail stop"
+
+#pm2 alias
+alias p="sudo pm2"
+
+#docker alias
+alias d="sudo docker" 
+alias dc="sudo docker-compose"
+
+# Tmux hotkey
+alias t="tmux"
+alias tl="tmux ls"
+alias ta="tmux a -t"
+alias tn="tmux new -s"
+alias tk="tmux kill-session -t"
 
 #general alias
 alias la="ls -alh"
@@ -44,69 +66,83 @@ alias ....="cd ../../../.."
 alias mproc="ps -aux | grep index"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
-alias h="history"
-alias jcd="jshint .jshintrc \$(git diff --name-only)"
-alias jcdc="jshint .jshintrc \$(git diff --name-only --cached)"
+alias fd="sudo find -name"
+function gp() {
+    echo grep -rn \"$1\" ./
+    sudo grep --color=auto -rn $1 ./
+}
+
+function ssk() {
+    ssh onrack@192.168.128.$1
+}
+function sdev() {
+    ssh onrack@10.62.59.$1
+}
+function snd() {
+    ssh onrack@172.31.128.$1
+}
+function sbmc() {
+    ssh onrack@192.168.188.$1
+}
+function slab() {
+    ssh onrack@10.62.59.$1
+}
 
 #open file alias
-alias vnet="vim /etc/network/interfaces"
-alias vsmb="vim /etc/samba/smb.conf"
-alias vdhcp="vim /var/lib/dhcp/dhcpd.leases"
-alias vbash="vim ~/.mybash"
+alias vnet="sudo vim /etc/network/interfaces"
+alias vsmb="sudo vim /etc/samba/smb.conf"
+alias vdhcp="sudo vim /var/lib/dhcp/dhcpd.leases"
+alias vbash="sudo vim ~/.bashrc"
 alias sbash="source ~/.bashrc"
-alias valias="vim ~/.alias"
-alias salias="source ~/.alias"
+alias cbash="cat ~/.bashrc"
 alias vvim="vim ~/.vimrc"
 alias vv="vim ~/.vimrc"
-alias lap="sudo vim /var/log/apache2/error.log"
-alias lhttp="sudo vim /var/log/upstart/on-http.log"
-alias lgraph="sudo vim /var/log/upstart/on-taskgraph.log"
-alias lgf="sudo vim /var/log/upstart/on-taskgraph.log"
-alias ltftp="sudo vim /var/log/upstart/on-tftp.log"
-alias ldhcp="sudo vim /var/log/upstart/on-dhcp-proxy.log"
-alias lcond="sudo vim /var/log/upstart/onrack-conductor.log"
+alias lgap="sudo less -R /var/log/apache2/error.log"
+alias lghttp="sudo less -R /var/log/upstart/on-http.log"
+alias lggraph="sudo less -R /var/log/upstart/on-taskgraph.log"
+alias lggf="sudo less -R /var/log/upstart/on-taskgraph.log"
+alias lgtftp="sudo less -R /var/log/upstart/on-tftp.log"
+alias lgdhcp="sudo less -R /var/log/upstart/on-dhcp-proxy.log"
+alias lgcond="sudo vim /var/log/upstart/onrack-conductor.log"
 
 #change directory alias
 alias cd-="cd -"
 alias cd.="cd .."
 alias cd..="cd .."
-alias cdcore="cd ~/src/on-core"
-alias cdtask="cd ~/src/on-tasks"
-alias cdjob="cd ~/src/on-tasks/lib/jobs"
+onracksrc="~/github"
+alias cdon="cd ${onracksrc}"
+alias cdcore="cd ${onracksrc}/on-core"
+alias cdtask="cd ${onracksrc}/on-tasks"
+alias cdjob="cd ${onracksrc}/on-tasks/lib/jobs"
 # cd to task definition
-alias cdtd="cd ~/src/on-tasks/lib/task-data/tasks"
-alias cdbt="cd ~/src/on-tasks/lib/task-data/base-tasks"
+alias cdtd="cd ${onracksrc}/on-tasks/lib/task-data/tasks"
 # cd to base task definition
-alias cdtb="cd ~/src/on-tasks/lib/task-data/base-tasks"
-alias cdgraph="cd ~/src/on-taskgraph"
-alias cdgf="cd ~/src/on-taskgraph"
-alias cdhttp="cd ~/src/on-http"
-alias cdserve="cd ~/src/onserve"
-alias cdse=" cd ~/src/onserve"
-alias cdtftp="cd ~/src/on-tftp"
-alias cddhcp="cd ~/src/on-dhcp-proxy"
+alias cdtb="cd ${onracksrc}/on-tasks/lib/task-data/base-tasks"
+alias cdgraph="cd ${onracksrc}/on-taskgraph"
+alias cdgf="cd ${onracksrc}/on-taskgraph"
+alias cdhttp="cd ${onracksrc}/on-http"
+alias cdstatic="cd ${onracksrc}/on-static"
+alias cdserve="cd ${onracksrc}/onserve"
+alias cdtftp="cd ${onracksrc}/on-tftp"
+alias cddhcp="cd ${onracksrc}/on-dhcp-proxy"
 alias cdnet="cd /etc/network"
 alias cdvim="cd ~/.vim/bundle"
 alias cddata="cd ~/data"
 alias cdrack="cd /opt/onrack"
-alias cdre="cd /var/renasar"
+alias cdmono="cd /var/renasar"
 alias cdlog="cd /var/log/upstart"
 alias cdprf="cd /var/renasar/on-http/data/profiles"
 alias cdtpl="cd /var/renasar/on-http/data/templates"
-alias cdst="cd /var/renasar/on-http/static/http"
-alias cdtest="cd ~/src/RackHD/test"
 
 #vim open project
-alias vcore="cdcore && vim ~/src/on-core/index.js"
-alias vdhcp="cddhcp && vim ~/src/on-dhcp-proxy/index.js"
-alias vgraph="cdgraph && vim ~/src/on-taskgraph/index.js"
-alias vgf="cdgraph && vim ~/src/on-taskgraph/index.js"
-alias vhttp="cdhttp && vim ~/src/on-http/index.js"
-alias vtftp="cdftp && vim ~/src/on-tftp/index.js"
-alias vserve="cdserve && vim ~/src/onserve/onserve/views/redfish_0_96_0/views.py"
-alias vse="vserve"
-alias vtask="cdtask && vim ~/src/on-tasks/index.js"
-alias vtest="cdtest && vim /home/onrack/src/RackHD/test/run.py"
+alias vcore="cdcore && vim ${onracksrc}/on-core/index.js"
+alias vdhcp="cddhcp && vim ${onracksrc}/on-dhcp-proxy/index.js"
+alias vgraph="cdgraph && vim ${onracksrc}/on-taskgraph/index.js"
+alias vgf="cdgraph && vim ${onracksrc}/on-taskgraph/index.js"
+alias vhttp="cdhttp && vim ${onracksrc}/on-http/index.js"
+alias vtftp="cdftp && vim ${onracksrc}/on-tftp/index.js"
+alias vserve="cdserve && vim ${onracksrc}/onserve/onserve/views.py"
+alias vstatic="cdstatic && vim ${onracksrc}/on-static/index.js"
 
 #service
 alias sdhcp="sudo service on-dhcp-proxy restart"
@@ -124,17 +160,6 @@ alias smo="sudo /opt/onrack/bin/monorail restart"
 alias smop="sudo /opt/onrack/bin/monorail stop"
 alias sserve="sudo service onrack-conductor restart && sudo service apache2 restart"
 alias sse="sudo service onrack-conductor restart && sudo service apache2 restart"
-alias ssep="sudo service onrack-conductor stop"
-alias sservep="sudo service onrack-conductor stop"
-
-#foreman
-alias nfs="nf -j ~/Procfile -e ~/.env start"
-
-#tmux
-alias tmux="tmux -2"
-
-#pm2
-alias pmrackhd="sudo pm2 ~/src/rackhd-services.yml"
 
 #find port
 function fp() {
@@ -166,16 +191,12 @@ function voff() {
     ipmitool -I lanplus -U admin -P admin -H 172.31.128.$1 chassis power off
 }
 
-function vreboot() {
+function vrestart() {
     ipmitool -I lanplus -U admin -P admin -H 172.31.128.$1 chassis power cycle
 }
 
 function vcycle() {
     ipmitool -I lanplus -U admin -P admin -H 172.31.128.$1 chassis power cycle
-}
-
-function lkp() {
-    http http://localhost:8080/api/common/lookups?q=$1
 }
 
 function m() {
@@ -227,50 +248,4 @@ function vtun() {
 function tun() {
     echo craete tunnel from port $1 to port $2
     sudo socat -d -d TCP4-LISTEN:$2,reuseaddr,fork TCP4:127.0.0.1:$1
-}
-
-function reposync() {
-    USAGE="Usage: $0 repository-name"
-    if [ $# == 0 ]; then
-        echo "$USAGE"
-        exit 1
-    fi
-
-#    while (( $# )); do
-        # repo = $1
-        # if [ $1 == serve ]; then
-        #      repo = "on$1"
-        # else
-        #      repo = "on-$1"
-        # fi
-        # echo "repo=$repo"
-        #
-        echo "syncing repository $1 ..."
-        cd ~/src/$1
-        # if [ $1 == serve ]; then
-        #     cd ~/src/on$1
-        # else
-        #     cd ~/src/on-$1
-        # fi
-
-        #cd ~/src/$repo
-        git checkout master
-        git fetch upstream
-        git merge upstream/master
-        git push origin master
-        echo "syncing repository done."
-#    shift
-#    done
-}
-
-function ut() {
-    mocha $1 -R spec --require spec/helper.js
-}
-
-function sor() {
-    ssh onrack@s$1.or
-}
-
-function ss() {
-    ssh onrack@$1
 }
