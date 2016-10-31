@@ -6,7 +6,7 @@
 export PATH=/home/onrack/npm/bin:/home/onrack/bin:/home/onrack/src/on-tools/node_modules/.bin:$PATH
 
 # xterm setting
-export TERM=xterm
+export TERM="xterm-256color"
 
 # ted misc
 export sk="192.168.128"
