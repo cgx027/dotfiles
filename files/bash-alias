@@ -40,6 +40,10 @@ alias mp="sudo /opt/onrack/bin/monorail stop"
 
 #pm2 alias
 alias p="sudo pm2"
+alias pl="sudo pm2 list"
+alias pr="sudo pm2 restart"
+alias ps="sudo pm2 start"
+alias pp="sudo pm2 stop"
 
 #docker alias
 alias d="sudo docker" 
@@ -92,9 +96,9 @@ function slab() {
 alias vnet="sudo vim /etc/network/interfaces"
 alias vsmb="sudo vim /etc/samba/smb.conf"
 alias vdhcp="sudo vim /var/lib/dhcp/dhcpd.leases"
-alias vbash="sudo vim ~/.bashrc"
+alias vbash="sudo vim ~/.bash-alias"
 alias sbash="source ~/.bashrc"
-alias cbash="cat ~/.bashrc"
+alias cbash="cat ~/.bash-alias"
 alias vvim="vim ~/.vimrc"
 alias vv="vim ~/.vimrc"
 alias lgap="sudo less -R /var/log/apache2/error.log"
@@ -117,9 +121,10 @@ alias cdjob="cd ${onracksrc}/on-tasks/lib/jobs"
 # cd to task definition
 alias cdtd="cd ${onracksrc}/on-tasks/lib/task-data/tasks"
 # cd to base task definition
+alias cdgithub="cd ${onracksrc}"
 alias cdtb="cd ${onracksrc}/on-tasks/lib/task-data/base-tasks"
 alias cdgraph="cd ${onracksrc}/on-taskgraph"
-alias cdgf="cd ${onracksrc}/on-taskgraph"
+alias cdgf="cd ${onracksrc}/on-taskgraph/lib/graphs"
 alias cdhttp="cd ${onracksrc}/on-http"
 alias cdstatic="cd ${onracksrc}/on-static"
 alias cdserve="cd ${onracksrc}/onserve"
@@ -131,8 +136,9 @@ alias cddata="cd ~/data"
 alias cdrack="cd /opt/onrack"
 alias cdmono="cd /var/renasar"
 alias cdlog="cd /var/log/upstart"
-alias cdprf="cd /var/renasar/on-http/data/profiles"
-alias cdtpl="cd /var/renasar/on-http/data/templates"
+alias cdprf="cdhttp && cd data/profiles"
+alias cdtpl="cdhttp && cd data/templates"
+alias cdconfig="cd /opt/monorail/"
 
 #vim open project
 alias vcore="cdcore && vim ${onracksrc}/on-core/index.js"
@@ -144,6 +150,7 @@ alias vtask="cdtask && vim ${onracksrc}/on-tasks/index.js"
 alias vtftp="cdftp && vim ${onracksrc}/on-tftp/index.js"
 alias vserve="cdserve && vim ${onracksrc}/onserve/onserve/views.py"
 alias vstatic="cdstatic && vim ${onracksrc}/on-static/index.js"
+alias vconfig="cd /opt/monorail/ && sudo vim config.json"
 
 #service
 alias sdhcp="sudo service on-dhcp-proxy restart"

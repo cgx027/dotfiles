@@ -1,6 +1,6 @@
 [user]
-    email = felix.yuan@emc.com
-    name = Felix Yuan
+	email = ted.chen@emc.com
+	name = Ted Chen
 [core]
     exculdesfile = ~/.gitignore-global
     editor = vim
@@ -8,3 +8,5 @@
     insteadOf = https://github.com
 [credential]
     helper = cache --timeout=144000
+[url "https://cgx027@github.com"]
+	insteadof = https://github.com
