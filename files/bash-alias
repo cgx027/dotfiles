@@ -42,7 +42,7 @@ alias mp="sudo /opt/onrack/bin/monorail stop"
 alias p="sudo pm2"
 alias pl="sudo pm2 list"
 alias pr="sudo pm2 restart"
-alias ps="sudo pm2 start"
+alias pst="sudo pm2 start"
 alias pp="sudo pm2 stop"
 
 #docker alias
@@ -71,6 +71,7 @@ alias mproc="ps -aux | grep index"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
 alias fd="sudo find -name"
+alias agg="ag --ignore='*.min.js' --ignore-dir='*/node_modules*'"
 function gp() {
     echo grep -rn \"$1\" ./
     sudo grep --color=auto -rn $1 ./
