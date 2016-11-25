@@ -71,8 +71,10 @@ alias mproc="ps -aux | grep index"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
 alias fd="sudo find -name"
-alias agg="ag --ignore='*.min.*' --ignore='*/html/*' --ignore-dir='*/node_modules*' --ignore-dir='*/web-ui/*' -G .js$"
-alias agp="ag --ignore='*.min.*' --ignore='*/html/*' --ignore-dir='*/node_modules*' --ignore-dir='*/web-ui/*' -G .js$ -G /spec/"
+# search javascript files, without node_module files, html files, compressed .min files
+alias agj="ag --ignore='*.min.*' --ignore='*/html/*' --ignore-dir='*/node_modules*' --ignore-dir='*/web-ui/*' -G .js$"
+# search test files
+alias agp="agj -G /spec/"
 function gp() {
     echo grep -rn \"$1\" ./
     sudo grep --color=auto -rn $1 ./
