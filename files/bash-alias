@@ -72,7 +72,7 @@ alias apti="sudo apt-get install"
 alias apts="apt-cache search"
 alias fd="sudo find -name"
 # search javascript files, without node_module files, html files, compressed .min files
-alias agj="ag --ignore='*.min.*' --ignore='*/html/*' --ignore-dir='*/node_modules*' --ignore-dir='*/web-ui/*' -G .js$"
+alias agj="ag --ignore='*-min.*' --ignore='*.min.*' --ignore='*/html/*' --ignore-dir='*/node_modules*' --ignore-dir='*/web-ui/*' -G .js$"
 # search test files
 alias agp="agj -G /spec/"
 function gp() {
