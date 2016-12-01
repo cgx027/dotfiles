@@ -85,8 +85,9 @@ Ctrl + b
 
 # Alt key shortcuts
 Using alt key shortcuts, no need to type ```prefix``` keys before use the commands.
+
 | Hotkey  | Command | Function |
-|:-------:|:-------:|:--------|
+|:-------:|:-------:|:---------|
 | Alt + w |         | Create a new window
 | Alt + n |         | Move to next window
 | Alt + p |         | Move to previous window
