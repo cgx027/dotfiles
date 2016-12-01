@@ -92,20 +92,16 @@ Using alt key shortcuts, no need to type ```prefix``` keys before use the comman
 | Alt + n |         | Move to next window
 | Alt + p |         | Move to previous window
 | Alt + e |         | Quit a window
-
 | Alt + s |         | Create a vertical panel
 | Alt + v |         | Create a horizontal panel
-
 | Alt + h |         | Move to the panel on the left
 | Alt + l |         | Move to the panel on the right
 | Alt + j |         | Move to the panel below
 | Alt + k |         | Move to the panel above
-
 | Alt + y |         | Move panel border left
 | Alt + o |         | Move panel border right
 | Alt + u |         | Move panel border down
 | Alt + i |         | Move panel border up
-
 | Alt + q |         | Quit a panel
 
 # Copy Tmux content to system clipboard
