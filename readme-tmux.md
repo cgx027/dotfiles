@@ -103,8 +103,10 @@ Using alt key shortcuts, no need to type ```prefix``` keys before use the comman
 | Alt + u |         | Move panel border down
 | Alt + i |         | Move panel border up
 | Alt + q |         | Quit a panel
+| Alt + c |         | Enter copy mode
+| Alt + m |         | Paste copy buffer
 
-# Copy Tmux content to system clipboard
+# Copy Tmux content to system clipboard ---- ***NOT WORKING YET, DO NOT USE***
 Achived using tmux-yank plugin. Reference: https://github.com/tmux-plugins/tmux-yank
 
 xclip tool is needed. To install:
@@ -124,4 +126,8 @@ sudo apt-get install xclip
 | r      |           | Reload tmux config
 | :      |           | Enter command mode
 |        | tmux info | Show every session window,pane, etc...
+
+
+# Reference
+* man page: http://man.openbsd.org/OpenBSD-current/man1/tmux.1
 
