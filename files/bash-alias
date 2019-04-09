@@ -1,42 +1,112 @@
 #export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/dist
-# source ~/.nvm/nvm.sh
-
-
-# npm path
-export PATH=$PATH:/home/onrack/npm/bin:/home/onrack/bin:/home/onrack/src/on-tools/node_modules/.bin
-
 # xterm setting
 export TERM="xterm-256color"
 
+# alias for enable/disable proxy
+function enableproxy() {
+    export http_proxy="proxy.vmware.com:3128"
+    export https_proxy="proxy.vmware.com:3128"
+}
+
+function enableshadowproxy() {
+    export http_proxy="http://127.0.0.1:1087"
+    export https_proxy="http://127.0.0.1:1087"
+}
+
+function disableproxy() {
+    export http_proxy=""
+    export https_proxy=""
+}
+
+function showproxy() {
+    echo  http_proxy : $http_proxy
+    echo https_proxy : $https_proxy
+}
+# setup Android home
+export ANDROID_HOME=/Users/tedc/Library/Android/sdk
+# export PATH="/Users/tedc/Library/Android/sdk/platform-tools":$PATH
+export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools:$PATH
+
+# Setup go
+export GOWORKSPACE=/Users/tedc/Documents/code/go
+alias cdgo="cd $GOWORKSPACE"
+# export PATH=$GOWORKSPACE/bin:$PATH
+# setting up go version manager gvm
+source /Users/tedc/.gvm/scripts/gvm
+gvm use go1.11.2
+# gvm pkgenv system # to check env settings
+gvm pkgset use system
+
+# use the latest python version
+function usepython37() {
+    echo Now using python 3.7
+        alias python=python3.7
+        alias pip=pip3.7
+}
+
+function usepython27() {
+    echo Now usinge python 2.7
+        alias python=python2.7
+        alias pip=pip2.7
+}
+# usepython37
+alias putest='python utest.py'
+
+# added by Miniconda3 4.5.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+echo Configuring conda
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/tedc/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/Users/tedc/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/tedc/miniconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/Users/tedc/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
+# py3 as defaul
+echo Use Python 3
+conda activate py3
+
+# enable jupyter notebook
+alias notebook="cd /Users/tedc/Documents/code/misc/jupeter_notebook && jupyter notebook"
+
+# npm path
+#export PATH=$PATH:/home/onrack/npm/bin:/home/onrack/bin:/home/onrack/src/on-tools/node_modules/.bin
+export PATH=$PATH:/Users/tedc/npm/bin/
+
+# setup nodejs
+source ~/.nvm/nvm.sh
+nvm use v10.15.3
+
+
 # ted misc
-export sk="192.168.128"
-export nd="172.31.128"
-export bmc="192.168.188"
-export lab="10.62.59"
 alias ic=ifconfig
 alias ge="env | grep"
 
 #file by Felix & Ben
 
 # grep alias
-alias ga="alias | grep"
+# alias ga="alias | grep"
 
 # git alias
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit -n10"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gs="git status"
+alias ga="git add"
 alias gm="git commit -m "
 alias gd="git diff --color"
 alias gr="git remote -v"
 
-#onrack alias
-alias ni="sudo node index.js"
-alias nid="sudo node --debug index.js"
-alias mt="mocha \$(find spec -name '*-spec.js') -R spec --require spec/helper.js"
-alias jc="jshint -c .jshintrc lib index.js"
-alias ms="sudo /opt/onrack/bin/monorail status"
-alias mrs="sudo /opt/onrack/bin/monorail restart"
-alias mp="sudo /opt/onrack/bin/monorail stop"
+# perforce alias
+export P4CONFIG=~/.p4config.tedc
+export P4EDITOR=vim
+export P4DIFF=vimdiff
 
 #pm2 alias
 alias p="sudo pm2"
@@ -46,8 +116,16 @@ alias pst="sudo pm2 start"
 alias pp="sudo pm2 stop"
 
 #docker alias
-alias d="sudo docker" 
-alias dc="sudo docker-compose"
+alias d="docker"
+alias dc="docker-compose"
+# alias d="sudo docker"
+# alias dc="sudo docker-compose"
+
+# kubenetes alias
+alias k="kubectl"
+
+# fzf alias
+alias f="fzf"
 
 # Tmux hotkey
 alias t="tmux"
@@ -56,6 +134,111 @@ alias ta="tmux a -t"
 alias tn="tmux new -s"
 alias tk="tmux kill-session -t"
 
+#itermocil shortcuts
+alias cdit='cd /Users/tedc/.itermocil'
+alias it='itermocil'
+alias itl='itermocil --list'
+alias ite='itermocil --edit'
+alias its='itermocil --show'
+alias itcert='itermocil vsancert'
+alias itgr='itermocil graphrunner'
+alias itgrs='itermocil graphrunner_search'
+alias itgrsr='itermocil graphrunner_search_rules'
+alias itgc='itermocil graphcompare'
+
+# Servers
+export homepc="192.168.1.19"
+export vsanhol="prme-vsanhol-observer-10.eng.vmware.com"
+export vm2="prme-vsanhol-nfs-vm2.eng.vmware.com"
+export ubuntuus="10.28.220.58"
+export ubuntush="10.110.162.29"
+export ubuntugr="10.28.223.65"
+# export ubuntu="10.110.126.52"
+export ubuntu="10.28.215.177"
+export dbc="10.165.103.3"
+export fileserver="10.110.162.19"
+alias cdfileserver="cd ~/mount/fileserver"
+# export workbench1="10.28.222.164"
+export workbench1="10.28.221.106"
+export workbench2="10.28.222.200"
+alias useworkbench1="export workbench=$workbench1"
+alias useworkbench2="export workbench=$workbench2"
+export jenkinsprod="vsancert-prodtools.eng.vmware.com"
+export zpstaging="10.110.176.200"
+
+function sshzpstaging() {
+    ssh tedc@$zpstaging
+}
+
+function mountfile() {
+    sshfs cert@$fileserver:/home/cert/ ~/mount/fileserver
+}
+
+function sshfileserver() {
+    ssh cert@$fileserver
+}
+
+function sshvm2() {
+    ssh tedc@$vm2
+}
+
+function sshvanhol() {
+    ssh tedc@$vsanhol
+}
+
+function sshhomepc() {
+    ssh ted@$homepc
+}
+
+function sshubuntush() {
+    ssh tedc@$ubuntush
+}
+
+function sshubuntuus() {
+    ssh cert@$ubuntuus
+}
+
+function sshubuntugr() {
+    ssh cert@$ubuntugr
+}
+
+function sshubuntu() {
+    ssh cert@$ubuntu
+}
+
+function sshdbc() {
+    ssh tedc@$dbc
+}
+
+function sshworkbench1() {
+    ssh root@$workbench1
+}
+
+function sshworkbench2() {
+    ssh root@$workbench2
+}
+
+function sshjenkinsprod() {
+    ssh root@${jenkinsprod}
+}
+
+# alias synccert='run_sync_dbc /Users/tedc/Documents/code/vmwgit/vsancertification/ /dbc/sc-dbc1213/tedc/code/vsancertification/'
+alias syncgraphrunner='rsync -azP /Users/tedc/Documents/code/vmwgit/sandbox1/ tedc@$dbc:/dbc/sc-dbc1213/tedc/sandbox1/'
+# synccert='rsync -azP /Users/tedc/Documents/code/vmwgit/vsanGenericCertification tedc@sc-dbc1213.eng.vmware.com:/dbc/sc-dbc1213/tedc/code/vsanGenericCertification'
+alias syncgraphcompare_us='rsync -azP /Users/tedc/Documents/code/projects/graph-compare/ cert@$ubuntuus:/home/cert/service/graph-compare'
+function syncworkbench1() {
+    rsync -azP --delete-after /Users/tedc/Documents/code/vmwgit/vsan_vsancertification/vpx/ root@$workbench1:/opt/vmware/VTAF/vsanio67-cert/VTAF/Test/vSANIO/vpx/
+}
+function syncworkbench1bak() {
+    rsync -azP --delete-after /Users/tedc/Documents/code/vmwgit/vsan_vsancertification_bak/vpx/ root@$workbench1:/opt/vmware/VTAF/vsanio67-cert/VTAF/Test/vSANIO/vpx/
+}
+function syncworkbench2() {
+    rsync -azP --delete-after /Users/tedc/Documents/code/vmwgit/vsan_vsancertification_bak/vpx/ root@$workbench2:/opt/vmware/VTAF/vsanio67-cert/VTAF/Test/vSANIO/vpx/
+}
+function syncworkbench2bak() {
+    rsync -azP --delete-after /Users/tedc/Documents/code/vmwgit/vsan_vsancertification_bak/vpx/ root@$workbench2:/opt/vmware/VTAF/vsanio67-cert/VTAF/Test/vSANIO/vpx/
+}
+
 #general alias
 alias la="ls -alh"
 alias c="clear"
@@ -63,21 +246,22 @@ alias l="ls"
 alias less="less -R"
 alias v="vim"
 alias ~="cd ~"
-alias .="cd .."
-alias ..="cd ../.."
-alias ...="cd ../../.."
+# alias .="cd .." #conflicted with gvm
+# alias ..="cd ../.."
+alias ..="cd .."
+alias ...="cd ../.."
 alias ....="cd ../../../.."
 alias mproc="ps -aux | grep index"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
-alias fd="sudo find -name"
+alias fd="sudo find ./ -name"
 # search javascript files, without node_module files, html files, compressed .min files
 alias agj="ag --ignore='*-min.*' --ignore='*.min.*' --ignore='*/html/*' --ignore-dir='*/node_modules*' --ignore-dir='*/web-ui/*' -G .js$"
 # search test files
 alias agp="agj -G /spec/"
 function gp() {
     echo grep -rn \"$1\" ./
-    sudo grep --color=auto -rn $1 ./
+        sudo grep --color=auto -rn $1 ./
 }
 
 function ssk() {
@@ -100,80 +284,112 @@ function slab() {
 alias vnet="sudo vim /etc/network/interfaces"
 alias vsmb="sudo vim /etc/samba/smb.conf"
 alias vdhcp="sudo vim /var/lib/dhcp/dhcpd.leases"
-alias vbash="sudo vim ~/.bash-alias"
-alias sbash="source ~/.bashrc"
+alias vbash="vim ~/.bash-alias"
+alias sbash="source ~/.bash-alias"
+alias sbashall="source ~/.bashrc"
 alias cbash="cat ~/.bash-alias"
 alias vvim="vim ~/.vimrc"
 alias vv="vim ~/.vimrc"
-alias lgap="sudo less -R /var/log/apache2/error.log"
-alias lghttp="sudo less -R /var/log/upstart/on-http.log"
-alias lggraph="sudo less -R /var/log/upstart/on-taskgraph.log"
-alias lggf="sudo less -R /var/log/upstart/on-taskgraph.log"
-alias lgtftp="sudo less -R /var/log/upstart/on-tftp.log"
-alias lgdhcp="sudo less -R /var/log/upstart/on-dhcp-proxy.log"
-alias lgcond="sudo vim /var/log/upstart/onrack-conductor.log"
 
 #change directory alias
 alias cd-="cd -"
 alias cd.="cd .."
 alias cd..="cd .."
-onracksrc="~/github"
-alias cdon="cd ${onracksrc}"
-alias cdcore="cd ${onracksrc}/on-core"
-alias cdtask="cd ${onracksrc}/on-tasks"
-alias cdjob="cd ${onracksrc}/on-tasks/lib/jobs"
-# cd to task definition
-alias cdtd="cd ${onracksrc}/on-tasks/lib/task-data/tasks"
-# cd to base task definition
-alias cdgithub="cd ${onracksrc}"
-alias cdtb="cd ${onracksrc}/on-tasks/lib/task-data/base-tasks"
-alias cdgraph="cd ${onracksrc}/on-taskgraph"
-alias cdgf="cd ${onracksrc}/on-taskgraph/lib/graphs"
-alias cdhttp="cd ${onracksrc}/on-http"
-alias cdstatic="cd ${onracksrc}/on-static"
-alias cdserve="cd ${onracksrc}/onserve"
-alias cdtftp="cd ${onracksrc}/on-tftp"
-alias cddhcp="cd ${onracksrc}/on-dhcp-proxy"
-alias cdui="cd ${onracksrc}/on-web-ui"
-alias cdnet="cd /etc/network"
-alias cdvim="cd ~/.vim/bundle"
-alias cddata="cd ~/data"
-alias cdrack="cd /opt/onrack"
-alias cdmono="cd /var/renasar"
-alias cdlog="cd /var/log/upstart"
-alias cdprf="cdhttp && cd data/profiles"
-alias cdtpl="cdhttp && cd data/templates"
-alias cdconfig="cd /opt/monorail/"
+export file="/Volumes/public"
+alias cdfile="cd /Volumes/public"
+alias cddownload="cd ~/Downloads"
+alias cddoc="cd ~/Documents"
+alias cdgithub="cd ~/Documents/code/github"
+alias cdgitlab="cd ~/Documents/code/gitlab"
+alias cdmisc="cd ~/Documents/code/misc"
+alias cdprojects="cd ~/Documents/code/projects"
+alias cdvmwgit="cd ~/Documents/code/vmwgit"
+alias cdperforce="cd ~/Documents/code/perforce"
+alias cdvsancert="cdvmwgit && cd vsan_vsancertification/vpx"
+alias vvsancert="cdvsancert && code ./"
+alias cdvsancertbak="cdvmwgit && cd vsan_vsancertification_bak/vpx"
+alias vvsancertbak="cdvsancertbak && code ./"
+alias cdcert="cd ~/Documents/code/vmwgit/vsan_vsancertification/"
+alias vcert="cdcertsuit && code ./"
+alias cdgraphrunner="cd ~/Documents/code/vmwgit/graphrunner"
+alias vgraphrunner="cdgraphrunner && code ./"
+alias cddatalytics="cdcert && cd tools/vsan_datalytics"
+alias vdatalytics="cddatalytics && code ./"
+alias cdgraphcompare="cdprojects && cd graph-compare"
+alias vgraphcompare="cdgraphcompare && code ./"
+alias mountdbc="sshfs -o allow_other,defer_permissions tedc@10.165.103.3:/dbc/sc-dbc1213/tedc ~/mount/dbc"
+alias cddbc="~/mount/dbc"
+alias cdzp="cd $GOWORKSPACE/src/gitlab.eng.vmware.com/zp/"
+alias cdzpfe="cdprojects && cd zpfe"
+alias cdscript="cd /Users/tedc/Documents/code/github/iterm2_scripts/Scripts"
+alias cdscriptgithug="cd /Users/tedc/Documents/code/github/iterm2_scripts/Scripts"
+alias cdonedrive="cd \"/Users/tedc/onedrive/OneDrive - VMware, Inc\""
+alias cdtypora="cdonedrive && cd Typora"
+alias cdalfred="cd /Users/tedc/Documents/code/github/alfred-workflow"
+
+# scp file to dbc server
 
 #vim open project
-alias vcore="cdcore && vim ${onracksrc}/on-core/index.js"
-alias vdhcp="cddhcp && vim ${onracksrc}/on-dhcp-proxy/index.js"
-alias vgraph="cdgraph && vim ${onracksrc}/on-taskgraph/index.js"
-alias vgf="cdgraph && vim ${onracksrc}/on-taskgraph/index.js"
-alias vhttp="cdhttp && vim ${onracksrc}/on-http/index.js"
-alias vtask="cdtask && vim ${onracksrc}/on-tasks/index.js"
-alias vtftp="cdftp && vim ${onracksrc}/on-tftp/index.js"
-alias vui="cdui && vim ${onracksrc}/on-web-ui/src/bundle.js"
-alias vserve="cdserve && vim ${onracksrc}/onserve/onserve/views.py"
-alias vstatic="cdstatic && vim ${onracksrc}/on-static/index.js"
-alias vconfig="cd /opt/monorail/ && sudo vim config.json"
+function scprdbc() {
+    scp -r $1 tedc@$dbc:/dbc/sc-dbc1213/tedc/$2
+}
 
+function scpdbc() {
+    scp $1 tedc@$dbc:/dbc/sc-dbc1213/tedc/$2
+}
+
+function scpnfs() {
+    scp $1 tedc@$nfsserver:$2
+}
+
+function scprnfs() {
+    scp -r $1 tedc@$nfsserver:$2
+}
+
+function scprfile() {
+    scp -r $1 cert@$fileserver:$2
+}
+
+function scpfile() {
+    scp $1 cert@$fileserver:$2
+}
+
+function scprubuntuus() {
+    scp -r $1 cert@$ubuntuus:~/
+}
+
+function scprubuntugr() {
+    scp -r $1 cert@$ubuntugr:~/
+}
+
+function scpubuntuus() {
+    scp $1 cert@ubuntuus:~/
+}
+
+function scpubuntugr() {
+    scp $1 cert@ubuntugr:~/
+}
+
+function scprubuntu() {
+    scp -r $1 tedc@$ubuntu:~/
+}
+
+function scpubuntu() {
+    scp $1 tedc@$ubuntu:~/
+}
+
+function scprworkbench() {
+    scp -r $1 root@$workbench:~/
+}
+
+function scpworkbench() {
+    scp $1 root@$workbench:~/
+}
+
+function duh() {
+    du -h -d $1
+}
 #service
-alias sdhcp="sudo service on-dhcp-proxy restart"
-alias sdhcpp="sudo service on-dhcp-proxy stop"
-alias shttpp="sudo service on-http stop"
-alias shttp="sudo service on-http restart"
-alias sgf="sudo service on-taskgraph restart"
-alias sgfp="sudo service on-taskgraph stop"
-alias sgraph="sudo service on-taskgraph restart"
-alias sgraphp="sudo service on-taskgraph stop"
-alias stftp="sudo service on-tftp restart"
-alias stftpp="sudo service on-tftp stop"
-alias smos="sudo /opt/onrack/bin/monorail status"
-alias smo="sudo /opt/onrack/bin/monorail restart"
-alias smop="sudo /opt/onrack/bin/monorail stop"
-alias sserve="sudo service onrack-conductor restart && sudo service apache2 restart"
-alias sse="sudo service onrack-conductor restart && sudo service apache2 restart"
 
 #find port
 function fp() {
@@ -215,17 +431,17 @@ function vcycle() {
 
 function m() {
     if [ $# -ge 2 ]
-    then
-      if [ $1 == post ]
-      then
-        http POST http://localhost:8080/api/common/$2 $3 $4 $5 $6 $7 $8 | prettyjson
-      else
-        http $1 http://localhost:8080/api/common/$2 $3 $4 $5 $6 $7 $8 | prettyjson
+        then
+            if [ $1 == post ]
+                then
+                    http POST http://localhost:8080/api/common/$2 $3 $4 $5 $6 $7 $8 | prettyjson
+            else
+                http $1 http://localhost:8080/api/common/$2 $3 $4 $5 $6 $7 $8 | prettyjson
 
-      fi
+                    fi
     else
         http -b http://localhost:8080/api/common/$1 $2 $3 $4 $5 $6 | prettyjson
-    fi
+            fi
 }
 
 function mpost() {
@@ -242,12 +458,12 @@ function mdel() {
 
 function o() {
     echo http GET https://localhost/rest/v1/$1 Authentication-Token:$2 $3 $4 $5 $6 $7 $8 $9 -b --verify=no
-    http GET https://localhost/rest/v1/$1 Authentication-Token:$2 $3 $4 $5 $6 $7 $8 $9 -b --verify=no | prettyjson
+        http GET https://localhost/rest/v1/$1 Authentication-Token:$2 $3 $4 $5 $6 $7 $8 $9 -b --verify=no | prettyjson
 }
 
 function opost() {
     echo http POST https://localhost/rest/v1/$1 Authentication-Token:$2 $3 $4 $5 $6 $7 $8 $9 -b --verify=no
-    http POST https://localhost/rest/v1/$1 Authentication-Token:$2 $3 $4 $5 $6 $7 $8 $9 --verify=no | prettyjson
+        http POST https://localhost/rest/v1/$1 Authentication-Token:$2 $3 $4 $5 $6 $7 $8 $9 --verify=no | prettyjson
 }
 
 function oauth() {
@@ -256,10 +472,10 @@ function oauth() {
 
 function vtun() {
     echo create tunnel for 172.31.128.$1 on port 5901
-    socat -d -d TCP4-LISTEN:5901,reuseaddr,fork TCP4:172.31.128.$1:5901
+        socat -d -d TCP4-LISTEN:5901,reuseaddr,fork TCP4:172.31.128.$1:5901
 }
 
 function tun() {
     echo craete tunnel from port $1 to port $2
-    sudo socat -d -d TCP4-LISTEN:$2,reuseaddr,fork TCP4:127.0.0.1:$1
+        sudo socat -d -d TCP4-LISTEN:$2,reuseaddr,fork TCP4:127.0.0.1:$1
 }

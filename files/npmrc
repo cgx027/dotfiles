@@ -1,3 +1,4 @@
-prefix=~/npm
 strict-ssl=false
-# registry=https://registry.npm.taobao.org
+registry=https://registry.npm.taobao.org/
+proxy=false
+https-proxy=proxy.vmware.com:3128

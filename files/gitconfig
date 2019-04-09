@@ -1,12 +1,17 @@
 [user]
-	email = ted.chen@emc.com
+	email = tedc@vmware.com
 	name = Ted Chen
 [core]
     exculdesfile = ~/.gitignore-global
     editor = vim
-[url "https://yyscamper@github.com"]
+	excludesfile = /Users/tedc/.gitignore_global
+[url "https://cgx027@github.com"]
     insteadOf = https://github.com
 [credential]
     helper = cache --timeout=144000
-[url "https://cgx027@github.com"]
-	insteadof = https://github.com
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
