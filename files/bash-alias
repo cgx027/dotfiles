@@ -82,6 +82,7 @@ export PATH=$PATH:/Users/tedc/npm/bin/
 
 # setup nodejs
 source ~/.nvm/nvm.sh
+nvm alias default 10.15.3
 nvm use v10.15.3
 
 
@@ -322,10 +323,11 @@ alias cddbc="~/mount/dbc"
 alias cdzp="cd $GOWORKSPACE/src/gitlab.eng.vmware.com/zp/"
 alias cdzpfe="cdprojects && cd zpfe"
 alias cdscript="cd /Users/tedc/Documents/code/github/iterm2_scripts/Scripts"
-alias cdscriptgithug="cd /Users/tedc/Documents/code/github/iterm2_scripts/Scripts"
+alias cdscriptgithub="cd /Users/tedc/Documents/code/github/iterm2_scripts/Scripts"
 alias cdonedrive="cd \"/Users/tedc/onedrive/OneDrive - VMware, Inc\""
 alias cdtypora="cdonedrive && cd Typora"
 alias cdalfred="cd /Users/tedc/Documents/code/github/alfred-workflow"
+alias cddotfiles="cd /Users/tedc/dotfiles"
 
 # scp file to dbc server
 

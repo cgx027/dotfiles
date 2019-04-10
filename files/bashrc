@@ -19,8 +19,4 @@ fi
 
 source ~/.bash-alias
 
-# source ~/.nvm/nvm.sh
-# alias usenode="nvm use v8.9.1"
-
-
 [ -z "$ZSH_NAME" ] && [ -f ~/.fzf.bash ] && source ~/.fzf.bash
