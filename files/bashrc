@@ -31,7 +31,7 @@ xterm*|rxvt*)
 esac
 
 # disable terminal flow contro /xon/xoff
-stty -ixon
+# stty -ixon
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -46,7 +46,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -85,7 +85,30 @@ PATH=$PATH:$GOPATH/bin
 
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-cd /home/onrack
+cd /home/cert
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+[[ -s "/home/cert/.gvm/scripts/gvm" ]] && source "/home/cert/.gvm/scripts/gvm"
 source ~/.bash-alias
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# added by Miniconda2 4.5.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/cert/miniconda2/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/cert/miniconda2/etc/profile.d/conda.sh" ]; then
+        . "/home/cert/miniconda2/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/cert/miniconda2/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<

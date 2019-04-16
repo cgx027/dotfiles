@@ -1,9 +1,13 @@
+# to avoid anoying "stty: 'standard input': Inappropriate ioctl for device" error
+[[ $- == *i* ]] && stty -ixon
+
 #export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/dist
 # source ~/.nvm/nvm.sh
+nvm use v8.9.1 > /dev/null
 
 
 # npm path
-export PATH=$PATH:/home/onrack/npm/bin:/home/onrack/bin:/home/onrack/src/on-tools/node_modules/.bin
+export PATH=$PATH:/home/cert/npm/bin:/home/cert/bin:/home/cert/src/on-tools/node_modules/.bin
 
 # xterm setting
 export TERM="xterm-256color"
@@ -18,8 +22,36 @@ alias ge="env | grep"
 
 #file by Felix & Ben
 
+# Setup go
+# export PATH=$PATH:/usr/local/go/bin
+export GOWORKSPACE=/home/cert/go
+alias cdgo="cd $GOWORKSPACE"
+alias cdgo="cd $GOWORKSPACE"
+alias cdzp="cd $GOWORKSPACE/src/gitlab.eng.vmware.com/zp"
+# export PATH=$GOWORKSPACE/bin:$PATH
+# setting up go version manager gvm
+source /home/cert/.gvm/scripts/gvm
+gvm use go1.11.2 > /dev/null
+# gvm pkgenv system # to check env settings
+gvm pkgset use system > /dev/null
+
 # grep alias
 alias ga="alias | grep"
+
+# ag alias
+# alias timeline="ag -G 'test-vpx\.vsan.*.log' \"Test version 5.2.009|Cleaning up done\""
+alias timeline="python3 ~/tools/vsancert_review_utils/timeline_decoder.py"
+alias getinfo="python3 ~/tools/vsancert_review_utils/getinfo.py"
+alias objgraph="python3 /home/cert/tools/vsan_obj_decoder/vsan_obj_decoder.py"
+
+# search alias
+alias sk="ag -G 'vmkernel.*.log'"
+alias sv="ag -G 'vobd.log'"
+alias st="ag -G 'test-vpx\.vsan.*.log'"
+
+function grepfio(){
+    cat $1 | grep -E "Creating FIO config|Done running FIO"
+}
 
 # git alias
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit -n10"
@@ -39,11 +71,11 @@ alias mrs="sudo /opt/onrack/bin/monorail restart"
 alias mp="sudo /opt/onrack/bin/monorail stop"
 
 #pm2 alias
-alias p="sudo pm2"
-alias pl="sudo pm2 list"
-alias pr="sudo pm2 restart"
-alias pst="sudo pm2 start"
-alias pp="sudo pm2 stop"
+alias p="pm2"
+alias pl="pm2 list"
+alias pr="pm2 restart"
+alias pst="pm2 start"
+alias pp="pm2 stop"
 
 #docker alias
 alias d="sudo docker" 
@@ -56,6 +88,9 @@ alias ta="tmux a -t"
 alias tn="tmux new -s"
 alias tk="tmux kill-session -t"
 
+# fzf alias
+alias f="fzf"
+
 #general alias
 alias la="ls -alh"
 alias c="clear"
@@ -63,10 +98,10 @@ alias l="ls"
 alias less="less -R"
 alias v="vim"
 alias ~="cd ~"
-alias .="cd .."
-alias ..="cd ../.."
-alias ...="cd ../../.."
-alias ....="cd ../../../.."
+# alias .="cd .."
+alias ..="cd ../"
+alias ...="cd ../.."
+alias ....="cd ../../.."
 alias mproc="ps -aux | grep index"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
@@ -80,38 +115,19 @@ function gp() {
     sudo grep --color=auto -rn $1 ./
 }
 
-function ssk() {
-    ssh onrack@192.168.128.$1
-}
-function sdev() {
-    ssh onrack@10.62.59.$1
-}
-function snd() {
-    ssh onrack@172.31.128.$1
-}
-function sbmc() {
-    ssh onrack@192.168.188.$1
-}
-function slab() {
-    ssh onrack@10.62.59.$1
+function duh() {
+       du -h --max-depth=$1
 }
 
 #open file alias
 alias vnet="sudo vim /etc/network/interfaces"
 alias vsmb="sudo vim /etc/samba/smb.conf"
 alias vdhcp="sudo vim /var/lib/dhcp/dhcpd.leases"
-alias vbash="sudo vim ~/.bash-alias"
+alias vbash="vim ~/.bash-alias"
 alias sbash="source ~/.bashrc"
 alias cbash="cat ~/.bash-alias"
 alias vvim="vim ~/.vimrc"
 alias vv="vim ~/.vimrc"
-alias lgap="sudo less -R /var/log/apache2/error.log"
-alias lghttp="sudo less -R /var/log/upstart/on-http.log"
-alias lggraph="sudo less -R /var/log/upstart/on-taskgraph.log"
-alias lggf="sudo less -R /var/log/upstart/on-taskgraph.log"
-alias lgtftp="sudo less -R /var/log/upstart/on-tftp.log"
-alias lgdhcp="sudo less -R /var/log/upstart/on-dhcp-proxy.log"
-alias lgcond="sudo vim /var/log/upstart/onrack-conductor.log"
 
 #change directory alias
 alias cd-="cd -"
@@ -127,53 +143,10 @@ alias cdtd="cd ${onracksrc}/on-tasks/lib/task-data/tasks"
 # cd to base task definition
 alias cdgithub="cd ${onracksrc}"
 alias cdtb="cd ${onracksrc}/on-tasks/lib/task-data/base-tasks"
-alias cdgraph="cd ${onracksrc}/on-taskgraph"
-alias cdgf="cd ${onracksrc}/on-taskgraph/lib/graphs"
-alias cdhttp="cd ${onracksrc}/on-http"
-alias cdstatic="cd ${onracksrc}/on-static"
-alias cdserve="cd ${onracksrc}/onserve"
-alias cdtftp="cd ${onracksrc}/on-tftp"
-alias cddhcp="cd ${onracksrc}/on-dhcp-proxy"
-alias cdui="cd ${onracksrc}/on-web-ui"
-alias cdnet="cd /etc/network"
-alias cdvim="cd ~/.vim/bundle"
-alias cddata="cd ~/data"
-alias cdrack="cd /opt/onrack"
-alias cdmono="cd /var/renasar"
-alias cdlog="cd /var/log/upstart"
-alias cdprf="cdhttp && cd data/profiles"
-alias cdtpl="cdhttp && cd data/templates"
-alias cdconfig="cd /opt/monorail/"
 
-#vim open project
-alias vcore="cdcore && vim ${onracksrc}/on-core/index.js"
-alias vdhcp="cddhcp && vim ${onracksrc}/on-dhcp-proxy/index.js"
-alias vgraph="cdgraph && vim ${onracksrc}/on-taskgraph/index.js"
-alias vgf="cdgraph && vim ${onracksrc}/on-taskgraph/index.js"
-alias vhttp="cdhttp && vim ${onracksrc}/on-http/index.js"
-alias vtask="cdtask && vim ${onracksrc}/on-tasks/index.js"
-alias vtftp="cdftp && vim ${onracksrc}/on-tftp/index.js"
-alias vui="cdui && vim ${onracksrc}/on-web-ui/src/bundle.js"
-alias vserve="cdserve && vim ${onracksrc}/onserve/onserve/views.py"
-alias vstatic="cdstatic && vim ${onracksrc}/on-static/index.js"
-alias vconfig="cd /opt/monorail/ && sudo vim config.json"
 
-#service
-alias sdhcp="sudo service on-dhcp-proxy restart"
-alias sdhcpp="sudo service on-dhcp-proxy stop"
-alias shttpp="sudo service on-http stop"
-alias shttp="sudo service on-http restart"
-alias sgf="sudo service on-taskgraph restart"
-alias sgfp="sudo service on-taskgraph stop"
-alias sgraph="sudo service on-taskgraph restart"
-alias sgraphp="sudo service on-taskgraph stop"
-alias stftp="sudo service on-tftp restart"
-alias stftpp="sudo service on-tftp stop"
-alias smos="sudo /opt/onrack/bin/monorail status"
-alias smo="sudo /opt/onrack/bin/monorail restart"
-alias smop="sudo /opt/onrack/bin/monorail stop"
-alias sserve="sudo service onrack-conductor restart && sudo service apache2 restart"
-alias sse="sudo service onrack-conductor restart && sudo service apache2 restart"
+# graph runner
+alias cdgraphruner="cd /workspace/testing/tedc/graphrunner"
 
 #find port
 function fp() {
